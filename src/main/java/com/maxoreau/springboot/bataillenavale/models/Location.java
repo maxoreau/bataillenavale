@@ -3,16 +3,16 @@ package com.maxoreau.springboot.bataillenavale.models;
 import javax.persistence.Entity;
 
 @Entity
-public class Case {
+public class Location {
 	public enum StatutCase {DISCOVERED, UNDISCOVERED}
 
 	private Long id;
 	private int x;
 	private int y;
 	private StatutCase statut;
-	private Bateau bateau;
+	private Boat bateau;
 
-	public Case() {
+	public Location() {
 		statut = StatutCase.UNDISCOVERED;
 		bateau = null;
 	}
@@ -50,11 +50,11 @@ public class Case {
 	}
 
 
-	public Bateau getBateau() {
+	public Boat getBateau() {
 		return bateau;
 	}
 
-	public void setBateau(Bateau bateau) {
+	public void setBateau(Boat bateau) {
 		this.bateau = bateau;
 	}
 

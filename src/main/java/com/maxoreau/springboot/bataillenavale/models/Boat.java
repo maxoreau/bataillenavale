@@ -3,7 +3,7 @@ package com.maxoreau.springboot.bataillenavale.models;
 import javax.persistence.Entity;
 
 @Entity
-public class Bateau {
+public class Boat {
 	
 	private Long id;
 	private int taille;
@@ -12,8 +12,8 @@ public class Bateau {
 	private int y;
 	private int pointsDeVie; // correspond aux pv restants : taille - nb de tirs reçus
 	
-	public Bateau() {
-		// TODO Auto-generated constructor stub
+	public Boat() {
+		super();
 	}
 
 	public Long getId() {

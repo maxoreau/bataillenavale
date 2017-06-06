@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.maxoreau.springboot.bataillenavale.models.Joueur;
+import com.maxoreau.springboot.bataillenavale.models.Player;
 
 
 @SpringBootApplication
@@ -18,8 +18,8 @@ public class BataillenavaleApplication {
 	@Bean
 	public CommandLineRunner demo (){
 		return (args) -> {
-			Joueur j1 = new Joueur();
-			j1.creerPartie();
+			Player j1 = new Player();
+			j1.createGame();
 			
 		};
 	}
