@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Entity;
-
-@Entity
+//import javax.persistence.Entity;
+//
+//@Entity
 public class Grid {
 
 	private Long id;

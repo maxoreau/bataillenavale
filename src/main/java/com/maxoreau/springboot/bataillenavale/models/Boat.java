@@ -1,16 +1,19 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
-import javax.persistence.Entity;
-
-@Entity
+//import javax.persistence.Entity;
+//
+//@Entity
 public class Boat {
 	
+	public enum Orientation{HORIZONTAL, VERTICAL}
+	
 	private Long id;
-	private int taille;
-	private int direction; // 0 = horizontal et 1 = vertical
+	private int size;
+	private Orientation orientation;
+	//coordinates of the top/left Location
 	private int x;
 	private int y;
-	private int pointsDeVie; // correspond aux pv restants : taille - nb de tirs reçus
+	private int healthPoints; // correspond aux pv restants : taille - nb de tirs reçus
 	
 	public Boat() {
 		super();
@@ -24,20 +27,20 @@ public class Boat {
 		this.id = id;
 	}
 
-	public int getTaille() {
-		return taille;
+	public int getSize() {
+		return size;
 	}
 
-	public void setTaille(int taille) {
-		this.taille = taille;
+	public void setSize(int size) {
+		this.size = size;
 	}
 
-	public int getDirection() {
-		return direction;
+	public Orientation getOrientation() {
+		return orientation;
 	}
 
-	public void setDirection(int direction) {
-		this.direction = direction;
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
 	}
 
 	public int getX() {
@@ -56,18 +59,18 @@ public class Boat {
 		this.y = y;
 	}
 
-	public int getPointsDeVie() {
-		return pointsDeVie;
+	public int getHealthPoints() {
+		return healthPoints;
 	}
 
-	public void setPointsDeVie(int pointsDeVie) {
-		this.pointsDeVie = pointsDeVie;
+	public void setHealthPoints(int healthPoints) {
+		this.healthPoints = healthPoints;
 	}
 
 	@Override
 	public String toString() {
-		return "Bateau [id=" + id + ", taille=" + taille + ", direction=" + direction + ", x=" + x + ", y=" + y
-				+ ", pointsDeVie=" + pointsDeVie + "]";
+		return "Boat [id=" + id + ", size=" + size + ", orientation=" + orientation + ", x=" + x + ", y=" + y
+				+ ", healthPoints=" + healthPoints + "]";
 	}
 	
 

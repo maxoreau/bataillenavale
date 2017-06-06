@@ -1,11 +1,11 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
-import javax.persistence.Entity;
-
-@Entity
+//import javax.persistence.Entity;
+//
+//@Entity
 public class Game {
 	
-	public enum GameStatus {OPEN, ONGOING, FINISHED}
+	public enum GameStatus {OPEN, READY, ONGOING, FINISHED}
 	
 	private Long id;
 	private GameStatus status = GameStatus.OPEN;	// OUVERTE (attente d'un deuxieme joueur), ENCOURS, TERMINEE

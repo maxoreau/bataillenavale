@@ -1,5 +1,7 @@
 package com.maxoreau.springboot.bataillenavale;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,8 +20,14 @@ public class BataillenavaleApplication {
 	@Bean
 	public CommandLineRunner demo (){
 		return (args) -> {
-			Player j1 = new Player();
-			j1.createGame();
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
+			System.out.println(ThreadLocalRandom.current().nextInt(0, 2));
 			
 		};
 	}

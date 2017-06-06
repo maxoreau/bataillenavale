@@ -3,14 +3,17 @@ package com.maxoreau.springboot.bataillenavale.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 
-@Entity
+import com.maxoreau.springboot.bataillenavale.models.Game.GameStatus;
+
+//@Entity
 public class Player {
 
 	private Long id;
 	private String name;
 	private List<Game> onGoingGames = new ArrayList<>();
+	private Game onGoingGame;
 	private int nbWins;
 
 	public Player() {
@@ -41,6 +44,14 @@ public class Player {
 		this.onGoingGames = onGoingGames;
 	}
 
+	public Game getOnGoingGame() {
+		return onGoingGame;
+	}
+
+	public void setOnGoingGame(Game onGoingGame) {
+		this.onGoingGame = onGoingGame;
+	}
+
 	public int getNbWins() {
 		return nbWins;
 	}
@@ -51,7 +62,8 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", name=" + name + ", onGoingGames=" + onGoingGames + ", nbWins=" + nbWins + "]";
+		return "Player [id=" + id + ", name=" + name + ", onGoingGames=" + onGoingGames + ", onGoingGame=" + onGoingGame
+				+ ", nbWins=" + nbWins + "]";
 	}
 
 	public void fire(int x, int y){
@@ -62,19 +74,27 @@ public class Player {
 		Game game = new Game();
 		game.setPlayer1(this);
 		game.setRemainingMoves(Parameters.getNbMoves());
+		onGoingGame = game;
 		this.onGoingGames.add(game);
 		return game;
 		
 	}
 	
-	public Grid generateGrid(){
+	public void generateGrid(){
 		System.out.println("generateGrid");
-		return null;
+		if (onGoingGame.getStatus().compareTo(GameStatus.OPEN) == 0) {
+			if (this.equals(onGoingGame.getPlayer1())) {
+				onGoingGame.setGridPlayer1(new Grid());
+			} else {
+				onGoingGame.setGridPlayer2(new Grid());
+			}
+		}
 		
 	}
 	
 	public void enterGame(Game game){
-		System.out.println("enterGame");		
+		System.out.println("enterGame");
+		onGoingGame = game;
 	}
 	
 	

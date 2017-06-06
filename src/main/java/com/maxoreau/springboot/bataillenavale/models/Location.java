@@ -1,20 +1,20 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
-import javax.persistence.Entity;
-
-@Entity
+//import javax.persistence.Entity;
+//
+//@Entity
 public class Location {
-	public enum StatutCase {DISCOVERED, UNDISCOVERED}
+	public enum LocationStatus {DISCOVERED, UNDISCOVERED}
 
 	private Long id;
 	private int x;
 	private int y;
-	private StatutCase statut;
-	private Boat bateau;
+	private LocationStatus status;
+	private Boat boat;
 
 	public Location() {
-		statut = StatutCase.UNDISCOVERED;
-		bateau = null;
+		status = LocationStatus.UNDISCOVERED;
+		boat = null;
 	}
 
 	public Long getId() {
@@ -41,26 +41,25 @@ public class Location {
 		this.y = y;
 	}
 
-	public StatutCase getStatut() {
-		return statut;
+	public LocationStatus getStatus() {
+		return status;
 	}
 
-	public void setStatut(StatutCase statut) {
-		this.statut = statut;
+	public void setStatus(LocationStatus status) {
+		this.status = status;
 	}
 
-
-	public Boat getBateau() {
-		return bateau;
+	public Boat getBoat() {
+		return boat;
 	}
 
-	public void setBateau(Boat bateau) {
-		this.bateau = bateau;
+	public void setBoat(Boat boat) {
+		this.boat = boat;
 	}
 
 	@Override
 	public String toString() {
-		return "Case [id=" + id + ", x=" + x + ", y=" + y + ", statut=" + statut + "]";
+		return "Location [id=" + id + ", x=" + x + ", y=" + y + ", status=" + status + ", boat=" + boat + "]";
 	}
 	
 
