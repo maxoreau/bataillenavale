@@ -2,6 +2,9 @@ package com.maxoreau.springboot.bataillenavale.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Carte {
 
 	private Long id;
@@ -9,6 +12,7 @@ public class Carte {
 	private List<Case> cases;
 
 	public Carte() {
+		taille = Parametres.getTailleCarte();
 		cases = null;
 	}
 

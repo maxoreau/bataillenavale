@@ -1,7 +1,11 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import javax.persistence.Entity;
 
+@Entity
 public class Partie {
+	
+	public enum StatutPartie {OUVERTE, ENCOURS, TERMINEE}
 	
 	private Long id;
 	private StatutPartie statut;	// OUVERTE (attente d'un deuxieme joueur), ENCOURS, TERMINEE

@@ -2,27 +2,27 @@ package com.maxoreau.springboot.bataillenavale.models;
 
 public class Parametres {
 	
-	private int nombreDeTours;
-	private int tailleCarte;
+	private static int nombreDeTours = 60;
+	private static int tailleCarte = 10;
 	
 	public Parametres() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	public int getNombreDeTours() {
+	public static int getNombreDeTours() {
 		return nombreDeTours;
 	}
 
-	public void setNombreDeTours(int nombreDeTours) {
-		this.nombreDeTours = nombreDeTours;
+	public static void setNombreDeTours(int nbTours) {
+		nombreDeTours = nbTours;
 	}
 
-	public int getTailleCarte() {
+	public static int getTailleCarte() {
 		return tailleCarte;
 	}
 
-	public void setTailleCarte(int tailleCarte) {
-		this.tailleCarte = tailleCarte;
+	public static void setTailleCarte(int taille) {
+		tailleCarte = taille;
 	}
 
 	@Override

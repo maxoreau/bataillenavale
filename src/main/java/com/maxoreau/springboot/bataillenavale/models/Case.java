@@ -1,6 +1,10 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Case {
+	public enum StatutCase {DISCOVERED, UNDISCOVERED}
 
 	private Long id;
 	private int x;

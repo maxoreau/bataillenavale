@@ -2,6 +2,9 @@ package com.maxoreau.springboot.bataillenavale.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Joueur {
 
 	private Long id;
@@ -52,6 +55,25 @@ public class Joueur {
 	}
 	
 	public void tirer(int x, int y){
+		
+	}
+	
+	public Partie creerPartie(){
+		Partie partie = new Partie();
+		partie.setJoueur1(this);
+		partie.setCarteJoueur1(new Carte());
+		partie.setToursRestants(Parametres.getNombreDeTours());
+		this.partiesEnCours.add(partie);
+		return partie;
+		
+	}
+	
+	public Carte genererCarte(){
+		return null;
+		
+	}
+	
+	public void rejoindrePartie(){
 		
 	}
 	
