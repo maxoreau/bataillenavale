@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @org.springframework.context.annotation.Configuration
 @ComponentScan({})
-@EntityScan({})
+@EntityScan({"com.maxoreau.springboot.bataillenavale.models"})
 public class Configuration {
 	
 

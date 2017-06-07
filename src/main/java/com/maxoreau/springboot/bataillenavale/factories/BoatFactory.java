@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.maxoreau.springboot.bataillenavale.models.Boat;
 import com.maxoreau.springboot.bataillenavale.models.Boat.Orientation;
-import com.maxoreau.springboot.bataillenavale.models.Game;
+import com.maxoreau.springboot.bataillenavale.models.Grid;
 
 public class BoatFactory {
 
@@ -21,24 +21,23 @@ public class BoatFactory {
 		return boatFactory;
 	}
 
-	public Boat createBoat(Game game) {
+	public Boat createBoat(Grid grid) {
+		
 		Boat boat = new Boat();
 		boolean overlap = true;
 		while (overlap) {
-			int rnd = ThreadLocalRandom.current().nextInt(0, 2);
-			Orientation orientation;
-			
+			int rnd = ThreadLocalRandom.current().nextInt(0, 2);			
 			if (rnd == 0) {
-				orientation = Orientation.HORIZONTAL;
+				boat.setOrientation(Orientation.HORIZONTAL);
+				boat.setX(ThreadLocalRandom.current().nextInt(0, (grid.getSize()+1-boat.getSize())));
+				boat.setY(ThreadLocalRandom.current().nextInt(0, (grid.getSize()+1)));
 				
 			} else {
-				orientation = Orientation.VERTICAL;
+				boat.setOrientation(Orientation.VERTICAL);
+				boat.setX(ThreadLocalRandom.current().nextInt(0, (grid.getSize()+1)));
+				boat.setY(ThreadLocalRandom.current().nextInt(0, (grid.getSize()+1-boat.getSize())));
 			}
 			
-			boat.setOrientation(orientation);
-			if (boat.getOrientation().compareTo(Orientation.HORIZONTAL) == 0) { // si horizontal
-			}
-
 		}
 
 		return boat;
