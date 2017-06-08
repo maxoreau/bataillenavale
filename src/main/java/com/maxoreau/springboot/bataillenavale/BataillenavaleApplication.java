@@ -38,6 +38,7 @@ public class BataillenavaleApplication {
 			System.out.println("jeu généré en " + (fin - debut) + " millisecondes");
 			p2.enterGame(g1);
 			
+			
 			do {
 				int colA = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
 				int rowA = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
@@ -52,6 +53,12 @@ public class BataillenavaleApplication {
 				g1.getGridPlayer1().displayOwnGrid();
 				
 			} while (g1.getStatus().compareTo(GameStatus.ONGOING) == 0);
+
+			
+			playerRepo.save(p1);
+			playerRepo.save(p2);
+			gameRepo.save(g1);
+			
 
 		};
 	}
