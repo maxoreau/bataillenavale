@@ -1,13 +1,23 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
 
 @Entity
-public class Game {
+public class Game implements Serializable {
+
+	/**
+	 * 
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
 
 	public enum GameStatus {
 		OPEN, ONGOING, FINISHED
@@ -25,11 +35,13 @@ public class Game {
 	@OneToOne
 	private Player player2;
 	@OneToOne
+	private Player winner;
+	
+	@OneToOne
 	private Grid gridPlayer1;
 	@OneToOne
 	private Grid gridPlayer2;
-	@OneToOne
-	private Player winner;
+	
 	private int onGoingMove;
 	private int player1Life;
 	private int player2Life;

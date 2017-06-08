@@ -1,31 +1,39 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.maxoreau.springboot.bataillenavale.models.Location.LocationStatus;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
-public class Grid {
+public class Grid implements Serializable {
 
+	/**
+	 * 
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private int size;
-	
-	@OneToMany
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Location> locations;
-	
-	@OneToMany
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Boat> boats;
-	
+
 	@OneToOne
 	private Game game;
 
@@ -66,7 +74,7 @@ public class Grid {
 	public void setBoats(List<Boat> boats) {
 		this.boats = boats;
 	}
-	
+
 	public Game getGame() {
 		return game;
 	}
@@ -80,21 +88,16 @@ public class Grid {
 		return "Grid [id=" + id + ", size=" + size + ", locations=" + locations + ", boats=" + boats + "]";
 	}
 
-//	public void createBoats(){
-//		Boat boat = BoatFactory.getBateauFactory().createBoat(this);
-//		boats.add(boat);
-//	}
-	
 	public void fireManager(Fire fire) {
 		Location firedLocation = locations.get(convertCoordToIndex(fire.getCol(), fire.getRow()));
-		
+
 		switch (firedLocation.getStatus()) {
 		case DISCOVERED:
 			// LA CASE A DEJA ETE TIREE. ON S'ARRETE LA
 			break;
 
 		case UNDISCOVERED:
-			// LA CASE N'A PAS DEJA ETE VISEE 
+			// LA CASE N'A PAS DEJA ETE VISEE
 			switch (firedLocation.getNature()) {
 			case WATER:
 				// PLOUF
@@ -114,8 +117,78 @@ public class Grid {
 			break;
 		}
 	}
-	
+
+	public void displayEnemyGrid() {
+		
+//		for (Location loc : this.locations) {
+//			System.out.println(loc.getCol());
+//		}
+		
+		String border = "##";
+		
+		for (int col = 0; col < this.size; col++) {
+			border += "###";
+		}
+		
+		System.out.println(border);
+
+		for (Location location : this.locations) {
+			if (location.getCol() == 0) {
+				switch (location.getStatus()) {
+				case UNDISCOVERED:
+					System.out.print("#   ");
+					break;
+				case DISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.print("# X ");
+						break;
+					case WATER:
+						System.out.print("# - ");
+						break;
+					}
+					break;
+				}
+				
+			} else if ((location.getCol() > 0) && (location.getCol() < (this.size - 1))) {
+				switch (location.getStatus()) {
+				case UNDISCOVERED:
+					System.out.print("   ");
+					break;
+				case DISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.print(" X ");
+						break;
+					case WATER:
+						System.out.print(" - ");
+						break;
+					}
+					break;
+				}
+			} else {
+				switch (location.getStatus()) {
+				case UNDISCOVERED:
+					System.out.println("   #");
+					break;
+				case DISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.println(" X #");
+						break;
+					case WATER:
+						System.out.println(" - #");
+						break;
+					}
+					break;
+				}
+			}
+		}
+		
+		System.out.println(border);
+	}
+
 	public int convertCoordToIndex(int col, int row) {
-		return ((row*size)+col);
+		return ((row * size) + col);
 	}
 }

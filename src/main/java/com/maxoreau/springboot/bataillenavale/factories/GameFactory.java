@@ -2,7 +2,7 @@ package com.maxoreau.springboot.bataillenavale.factories;
 
 import com.maxoreau.springboot.bataillenavale.models.Boat;
 import com.maxoreau.springboot.bataillenavale.models.Game;
-import com.maxoreau.springboot.bataillenavale.models.GameAdministrator;
+import com.maxoreau.springboot.bataillenavale.models.GameManager;
 import com.maxoreau.springboot.bataillenavale.models.Player;
 
 public class GameFactory {
@@ -51,7 +51,7 @@ public class GameFactory {
 		p.getGames().add(game); 
 		
 		// enregistre dans la liste totale des parties
-		GameAdministrator.getGameAdmin().getGames().add(game); 
+		GameManager.getGames().add(game); 
 		return game;
 	}
 	

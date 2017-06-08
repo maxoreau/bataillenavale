@@ -1,12 +1,22 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
-public class Location {
+public class Location implements Serializable {
+	/**
+	 * 
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
+
 	public enum LocationStatus {DISCOVERED, UNDISCOVERED}
 	public enum LocationNature {WATER, BOAT}
 
@@ -17,6 +27,8 @@ public class Location {
 	private int row;
 	private LocationStatus status;
 	private LocationNature nature;
+	
+	@OneToOne
 	private Boat boat;
 
 	public Location() {

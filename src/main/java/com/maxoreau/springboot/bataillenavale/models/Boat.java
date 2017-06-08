@@ -1,5 +1,6 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
-public class Boat {
+public class Boat implements Serializable {
 	
+	/**
+	 * 
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
+
 	public enum Orientation{HORIZONTAL, VERTICAL}
 
 	@Id
@@ -21,6 +29,8 @@ public class Boat {
 	//coordinates of the top/left Location
 	private int col;
 	private int row;
+	
+	@Transient
 	private List<Location> positions = new ArrayList<>();
 	
 	public Boat() {

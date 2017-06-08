@@ -1,14 +1,16 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
 
-@Entity
-public class Parameters {
+
+public class Parameters implements Serializable {
+		
 	
-
+	private static final long serialVersionUID = 1L;
+	
 	
 	private static int nbMoves = 10;
 	private static int gridSize = 10;
