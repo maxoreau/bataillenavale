@@ -1,12 +1,15 @@
 package com.maxoreau.springboot.bataillenavale;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.maxoreau.springboot.bataillenavale.models.Game;
-import com.maxoreau.springboot.bataillenavale.models.Location;
+import com.maxoreau.springboot.bataillenavale.models.Game.GameStatus;
+import com.maxoreau.springboot.bataillenavale.models.Parameters;
 import com.maxoreau.springboot.bataillenavale.models.Player;
 import com.maxoreau.springboot.bataillenavale.repositories.GameRepository;
 import com.maxoreau.springboot.bataillenavale.repositories.PlayerRepository;
@@ -34,47 +37,21 @@ public class BataillenavaleApplication {
 			Long fin = System.currentTimeMillis();
 			System.out.println("jeu généré en " + (fin - debut) + " millisecondes");
 			p2.enterGame(g1);
-
-			p1.fire(0, 0);
-			System.out.println("player2's grid");
-			g1.getGridPlayer2().displayEnemyGrid();
 			
-			p2.fire(0, 0);
-			System.out.println("player1's grid");
-			g1.getGridPlayer1().displayEnemyGrid();
-			
-			p1.fire(1, 1);
-			System.out.println("player2's grid");
-			g1.getGridPlayer2().displayEnemyGrid();
-			
-			p2.fire(2, 9);
-			System.out.println("player1's grid");
-			g1.getGridPlayer1().displayEnemyGrid();
-			
-			p1.fire(5, 5);
-			System.out.println("player2's grid");
-			g1.getGridPlayer2().displayEnemyGrid();
-			
-			p2.fire(2, 6);
-			System.out.println("player1's grid");
-			g1.getGridPlayer1().displayEnemyGrid();
-			
-			p1.fire(7, 2);
-			System.out.println("player2's grid");
-			g1.getGridPlayer2().displayEnemyGrid();
-			
-			p2.fire(4, 3);
-			System.out.println("player1's grid");
-			g1.getGridPlayer1().displayEnemyGrid();
-			
-			p1.fire(5, 5);
-			System.out.println("player2's grid");
-			g1.getGridPlayer2().displayEnemyGrid();
-			
-			p2.fire(2, 6);
-			System.out.println("player1's grid");
-			g1.getGridPlayer1().displayEnemyGrid();
-						
+			do {
+				int colA = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
+				int rowA = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
+				p1.fire(colA, rowA);
+				System.out.println("player2's grid");
+				g1.getGridPlayer2().displayOwnGrid();
+				
+				int colB = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
+				int rowB = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
+				p2.fire(colB, rowB);
+				System.out.println("player1's grid");
+				g1.getGridPlayer1().displayOwnGrid();
+				
+			} while (g1.getStatus().compareTo(GameStatus.ONGOING) == 0);
 
 		};
 	}

@@ -33,15 +33,10 @@ public class GameFactory {
 		// on attribue des nouvelles grilles aux joueurs. Utilisation d'une factory
 		game.setGridPlayer1(GridFactory.getGridFactory().createGrid());
 		game.getGridPlayer1().setGame(game);
-		for (Boat boat : game.getGridPlayer1().getBoats()) {
-			game.setPlayer1Life(game.getPlayer1Life() + boat.getSize());
-		}
+
 		game.setGridPlayer2(GridFactory.getGridFactory().createGrid());
 		game.getGridPlayer2().setGame(game);
-		for (Boat boat : game.getGridPlayer2().getBoats()) {
-			game.setPlayer2Life(game.getPlayer2Life() + boat.getSize());
-		}
-		
+
 		// le joueur qui crée la partie commencera à jouer.
 		game.setCurrentPlayer(p); 
 		

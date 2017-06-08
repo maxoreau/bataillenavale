@@ -36,6 +36,8 @@ public class Grid implements Serializable {
 
 	@OneToOne
 	private Game game;
+	
+	private int life;
 
 	public Grid() {
 		size = Parameters.getGridSize();
@@ -83,9 +85,18 @@ public class Grid implements Serializable {
 		this.game = game;
 	}
 
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
+	}
+
 	@Override
 	public String toString() {
-		return "Grid [id=" + id + ", size=" + size + ", locations=" + locations + ", boats=" + boats + "]";
+		return "Grid [id=" + id + ", size=" + size + ", locations=" + locations + ", boats=" + boats + ", game=" + game
+				+ ", life=" + life + "]";
 	}
 
 	public void fireManager(Fire fire) {
@@ -104,25 +115,104 @@ public class Grid implements Serializable {
 				break;
 			case BOAT:
 				// BOOM
-				// ON DECREMENTE LA VIE DU PLAYER AYANT RECU LE TIR
-				if (fire.getPlayer().equals(game.getPlayer1())) {
-					game.setPlayer2Life((game.getPlayer2Life() - 1));
-				} else {
-					game.setPlayer1Life((game.getPlayer1Life() - 1));
-				}
+				// ON DECREMENTE LA VIE DE 1
+				life--;
 				break;
 			}
-
+			// PUIS ON DECOUVRE LA CARTE
 			firedLocation.setStatus(LocationStatus.DISCOVERED);
 			break;
 		}
 	}
 
-	public void displayEnemyGrid() {
+	public void displayOwnGrid() {
 		
-//		for (Location loc : this.locations) {
-//			System.out.println(loc.getCol());
-//		}
+		String border = "##";
+		
+		for (int col = 0; col < this.size; col++) {
+			border += "###";
+		}
+		
+		System.out.println(border);
+
+		for (Location location : this.locations) {
+			if (location.getCol() == 0) {
+				switch (location.getStatus()) {
+				case UNDISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.print("# @ ");
+						break;
+					case WATER:
+						System.out.print("#   ");
+						break;
+					}
+					break;
+				case DISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.print("# X ");
+						break;
+					case WATER:
+						System.out.print("# * ");
+						break;
+					}
+					break;
+				}
+				
+			} else if ((location.getCol() > 0) && (location.getCol() < (this.size - 1))) {
+				switch (location.getStatus()) {
+				case UNDISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.print(" @ ");
+						break;
+					case WATER:
+						System.out.print("   ");
+						break;
+					}
+					break;
+				case DISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.print(" X ");
+						break;
+					case WATER:
+						System.out.print(" * ");
+						break;
+					}
+					break;
+				}
+			} else {
+				switch (location.getStatus()) {
+				case UNDISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.println(" @ #");
+						break;
+					case WATER:
+						System.out.println("   #");
+						break;
+					}
+					break;
+				case DISCOVERED:
+					switch (location.getNature()) {
+					case BOAT:
+						System.out.println(" X #");
+						break;
+					case WATER:
+						System.out.println(" * #");
+						break;
+					}
+					break;
+				}
+			}
+		}
+		
+		System.out.println(border);
+	}
+
+	public void displayEnemyGrid() {
 		
 		String border = "##";
 		

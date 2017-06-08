@@ -43,8 +43,6 @@ public class Game implements Serializable {
 	private Grid gridPlayer2;
 	
 	private int onGoingMove;
-	private int player1Life;
-	private int player2Life;
 
 	public Game() {
 		super();
@@ -122,22 +120,6 @@ public class Game implements Serializable {
 		this.winner = winner;
 	}
 
-	public int getPlayer1Life() {
-		return player1Life;
-	}
-
-	public void setPlayer1Life(int player1Life) {
-		this.player1Life = player1Life;
-	}
-
-	public int getPlayer2Life() {
-		return player2Life;
-	}
-
-	public void setPlayer2Life(int player2Life) {
-		this.player2Life = player2Life;
-	}
-
 	@Override
 	public String toString() {
 		return "Game [id=" + id + ", status=" + status + ", currentPlayer=" + currentPlayer + ", player1=" + player1
@@ -177,17 +159,20 @@ public class Game implements Serializable {
 				System.out.println("not " + fire.getPlayer().getName() + "'s turn");
 			}
 
-			if (onGoingMove > Parameters.getNbMoves() || player1Life == 0 || player2Life == 0) {
+			if (onGoingMove > Parameters.getNbMoves() || gridPlayer1.getLife() == 0 || gridPlayer2.getLife() == 0) {
 				System.out.println("Game Over");
 				setStatus(GameStatus.FINISHED);
-				if ((player1Life - player2Life) > 0) {
+				if ((gridPlayer1.getLife() - gridPlayer2.getLife()) > 0) {
 					// PLAYER 1 GAGNE
+					System.out.println(player1.getName() + " WINS : remaining life : " + gridPlayer1.getLife() + " / " + gridPlayer2.getLife());
 					winner = player1;					
-				} else if ((player1Life - player2Life) < 0) {
+				} else if ((gridPlayer1.getLife() - gridPlayer2.getLife()) < 0) {
 					// PLAYER 2 GAGNE
+					System.out.println(player2.getName() + " WINS : remaining life : " + gridPlayer2.getLife() + " / " + gridPlayer1.getLife());
 					winner = player2;
 				} else {
-					// MATCH NUL					
+					// MATCH NUL
+					System.out.println("DRAW : remaining life = " + gridPlayer1.getLife());					
 				}
 			}
 

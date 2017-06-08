@@ -51,6 +51,9 @@ public class GridFactory {
 				
 			} while (!added);
 		}
+		for (Boat boat : grid.getBoats()) {
+			grid.setLife((grid.getLife() + boat.getSize()));
+		}
 
 		return grid;
 	}

@@ -12,7 +12,7 @@ public class Parameters implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private static int nbMoves = 10;
+	private static int nbMoves = 60;
 	private static int gridSize = 10;
 	private static List<Integer> boatSizes = new ArrayList<>();
 	
