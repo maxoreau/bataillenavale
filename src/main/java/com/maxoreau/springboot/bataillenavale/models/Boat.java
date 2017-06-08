@@ -1,22 +1,35 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
-//import javax.persistence.Entity;
-//
-//@Entity
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Boat {
 	
 	public enum Orientation{HORIZONTAL, VERTICAL}
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private int size;
 	private Orientation orientation;
 	//coordinates of the top/left Location
-	private int x;
-	private int y;
-	private int healthPoints; // correspond aux pv restants : taille - nb de tirs reçus
+	private int col;
+	private int row;
+	private List<Location> positions = new ArrayList<>();
 	
 	public Boat() {
 		super();
+	}
+	
+	public Boat(int size) {
+		super();
+		this.size = size;
 	}
 
 	public Long getId() {
@@ -43,34 +56,34 @@ public class Boat {
 		this.orientation = orientation;
 	}
 
-	public int getX() {
-		return x;
+	public int getCol() {
+		return col;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setCol(int col) {
+		this.col = col;
 	}
 
-	public int getY() {
-		return y;
+	public int getRow() {
+		return row;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setRow(int row) {
+		this.row = row;
 	}
 
-	public int getHealthPoints() {
-		return healthPoints;
+	public List<Location> getPositions() {
+		return positions;
 	}
 
-	public void setHealthPoints(int healthPoints) {
-		this.healthPoints = healthPoints;
+	public void setPositions(List<Location> positions) {
+		this.positions = positions;
 	}
 
 	@Override
 	public String toString() {
-		return "Boat [id=" + id + ", size=" + size + ", orientation=" + orientation + ", x=" + x + ", y=" + y
-				+ ", healthPoints=" + healthPoints + "]";
+		return "Boat [id=" + id + ", size=" + size + ", orientation=" + orientation + ", col=" + col + ", row=" + row
+				+ ", positions=" + positions + "]";
 	}
 	
 

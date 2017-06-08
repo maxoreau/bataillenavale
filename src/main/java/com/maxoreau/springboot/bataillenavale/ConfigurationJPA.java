@@ -2,11 +2,12 @@ package com.maxoreau.springboot.bataillenavale;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-@org.springframework.context.annotation.Configuration
-@ComponentScan({})
+@Configuration
+@ComponentScan({"com.maxoreau.springboot.bataillenavale"})
 @EntityScan({"com.maxoreau.springboot.bataillenavale.models"})
-public class Configuration {
+public class ConfigurationJPA {
 	
 
 }

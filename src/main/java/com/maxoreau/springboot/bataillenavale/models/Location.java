@@ -1,20 +1,26 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
-//import javax.persistence.Entity;
-//
-//@Entity
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Location {
 	public enum LocationStatus {DISCOVERED, UNDISCOVERED}
+	public enum LocationNature {WATER, BOAT}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private int x;
-	private int y;
+	private int col;
+	private int row;
 	private LocationStatus status;
+	private LocationNature nature;
 	private Boat boat;
 
 	public Location() {
 		status = LocationStatus.UNDISCOVERED;
-		boat = null;
 	}
 
 	public Long getId() {
@@ -25,20 +31,20 @@ public class Location {
 		this.id = id;
 	}
 
-	public int getX() {
-		return x;
+	public int getCol() {
+		return col;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setCol(int col) {
+		this.col = col;
 	}
 
-	public int getY() {
-		return y;
+	public int getRow() {
+		return row;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setRow(int row) {
+		this.row = row;
 	}
 
 	public LocationStatus getStatus() {
@@ -47,6 +53,14 @@ public class Location {
 
 	public void setStatus(LocationStatus status) {
 		this.status = status;
+	}
+
+	public LocationNature getNature() {
+		return nature;
+	}
+
+	public void setNature(LocationNature nature) {
+		this.nature = nature;
 	}
 
 	public Boat getBoat() {
@@ -59,7 +73,8 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", x=" + x + ", y=" + y + ", status=" + status + ", boat=" + boat + "]";
+		return "Location [id=" + id + ", col=" + col + ", row=" + row + ", status=" + status + ", nature=" + nature
+				+ ", boat=" + boat + "]";
 	}
 	
 

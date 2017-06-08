@@ -1,13 +1,27 @@
 package com.maxoreau.springboot.bataillenavale.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+
+@Entity
 public class Parameters {
 	
-	private static int nbMoves = 60;
-	private static int gridSize = 10;
+
 	
-	public Parameters() {
-		super();		
+	private static int nbMoves = 10;
+	private static int gridSize = 10;
+	private static List<Integer> boatSizes = new ArrayList<>();
+	
+	static {
+		boatSizes.add(5);
+		boatSizes.add(4);
+		boatSizes.add(3);
+		boatSizes.add(3);
+		boatSizes.add(2);
 	}
+	
 
 	public static int getNbMoves() {
 		return nbMoves;
@@ -25,9 +39,12 @@ public class Parameters {
 		Parameters.gridSize = gridSize;
 	}
 
-	@Override
-	public String toString() {
-		return "Parameters []";
+	public static List<Integer> getBoatSizes() {
+		return boatSizes;
+	}
+
+	public static void setBoatSizes(List<Integer> boatSizes) {
+		Parameters.boatSizes = boatSizes;
 	}
 	
 

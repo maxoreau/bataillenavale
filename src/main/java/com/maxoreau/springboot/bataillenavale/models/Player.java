@@ -3,23 +3,35 @@ package com.maxoreau.springboot.bataillenavale.models;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.persistence.Entity;
-
+import com.maxoreau.springboot.bataillenavale.factories.GameFactory;
 import com.maxoreau.springboot.bataillenavale.models.Game.GameStatus;
 
-//@Entity
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Player {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	private List<Game> onGoingGames = new ArrayList<>();
+	
+	@OneToMany
+	private List<Game> games = new ArrayList<>();
+	
+	@OneToOne
 	private Game onGoingGame;
 	private int nbWins;
 
 	public Player() {
 		super();
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -36,12 +48,12 @@ public class Player {
 		this.name = name;
 	}
 
-	public List<Game> getOnGoingGames() {
-		return onGoingGames;
+	public List<Game> getGames() {
+		return games;
 	}
 
-	public void setOnGoingGames(List<Game> onGoingGames) {
-		this.onGoingGames = onGoingGames;
+	public void setGames(List<Game> games) {
+		this.games = games;
 	}
 
 	public Game getOnGoingGame() {
@@ -62,41 +74,54 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [id=" + id + ", name=" + name + ", onGoingGames=" + onGoingGames + ", onGoingGame=" + onGoingGame
-				+ ", nbWins=" + nbWins + "]";
+		return "Player [id=" + id + ", name=" + name + ", games=" + games + ", onGoingGame=" + onGoingGame + ", nbWins="
+				+ nbWins + "]";
 	}
 
-	public void fire(int x, int y){
-		
+	public void fire(int col, int row) {
+		Fire fire = new Fire();
+		fire.setPlayer(this);
+		fire.setCol(col);
+		fire.setRow(row);
+		onGoingGame.fireManager(fire);
 	}
-	
-	public Game createGame(){
-		Game game = new Game();
-		game.setPlayer1(this);
-		game.setRemainingMoves(Parameters.getNbMoves());
-		onGoingGame = game;
-		this.onGoingGames.add(game);
-		return game;
-		
+
+	public Game createGame() {
+		System.out.println("player " + this.name + " createGame");
+		return GameFactory.getGameFactory().createGame(this);
 	}
-	
-	public void generateGrid(){
-		System.out.println("generateGrid");
-		if (onGoingGame.getStatus().compareTo(GameStatus.OPEN) == 0) {
-			if (this.equals(onGoingGame.getPlayer1())) {
-				onGoingGame.setGridPlayer1(new Grid());
-			} else {
-				onGoingGame.setGridPlayer2(new Grid());
-			}
+
+	public void enterGame(Game game) {
+		System.out.println("player " + this.name + " enterGame");
+		
+		// La partie est en attente d'un deuxieme joueur et on peut y accéder
+		if (game.getStatus().equals(GameStatus.OPEN)) { 
+			
+			// on attribue le deuxième joueur de la partie
+			game.setPlayer2(this); 	
+			
+			// On initialise le tour en cours à un pour commencer la partie
+			game.setOnGoingMove(1); 
+			
+			// on passe le statut de la partie à ONGOING pour la fermer aux autres joueurs
+			game.setStatus(GameStatus.ONGOING);
+			
+			// cette partie devient la partie en cours et est ajoutée à la liste des parties
+			onGoingGame = game;
+			games.add(onGoingGame);
+						
+			
+		// La partie est déjà en cours et le joueur appartient à la partie, il peut alors la rejoindre
+		} else if ((game.getStatus().equals(GameStatus.ONGOING))
+				&& ((game.getPlayer1().equals(this)) || (game.getPlayer2().equals(this)))) {
+			
+			// cette partie devient la partie en cours.
+			onGoingGame = game;
 		}
-		
 	}
-	
-	public void enterGame(Game game){
-		System.out.println("enterGame");
-		onGoingGame = game;
+
+	public void leftGame() {
+
 	}
-	
-	
 
 }
