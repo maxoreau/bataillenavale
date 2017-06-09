@@ -2,7 +2,10 @@ package com.maxoreau.springboot.bataillenavale.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +29,7 @@ public class Game implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Enumerated(EnumType.STRING)
 	private GameStatus status = GameStatus.OPEN; // OPEN (attente d'un deuxieme joueur), ONGOING, FINISHED
 	
 	@OneToOne
@@ -37,9 +41,9 @@ public class Game implements Serializable {
 	@OneToOne
 	private Player winner;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Grid gridPlayer1;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Grid gridPlayer2;
 	
 	private int onGoingMove;

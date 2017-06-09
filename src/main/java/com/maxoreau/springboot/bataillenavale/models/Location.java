@@ -3,6 +3,8 @@ package com.maxoreau.springboot.bataillenavale.models;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,10 @@ public class Location implements Serializable {
 	private Long id;
 	private int col;
 	private int row;
+	
+	@Enumerated(EnumType.STRING)
 	private LocationStatus status;
+	@Enumerated(EnumType.STRING)
 	private LocationNature nature;
 	
 	@OneToOne
