@@ -7,6 +7,7 @@ import java.util.List;
 import com.maxoreau.springboot.bataillenavale.factories.GameFactory;
 import com.maxoreau.springboot.bataillenavale.models.Game.GameStatus;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

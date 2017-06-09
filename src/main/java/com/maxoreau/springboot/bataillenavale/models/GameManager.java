@@ -16,9 +16,9 @@ import com.maxoreau.springboot.bataillenavale.repositories.PlayerRepository;
 public class GameManager {
 	
 	@Autowired
-	GameRepository daoGame;
+	private GameRepository daoGame;
 	@Autowired
-	PlayerRepository daoPlayer;
+	private PlayerRepository daoPlayer;
 		
 	private static List<Game> games = new ArrayList<>();
 	private static List<Player> players = new ArrayList<>();

@@ -133,9 +133,7 @@ public class Game implements Serializable {
 
 	public void fireManager(Fire fire) {
 		
-		//final Integer player1Life;
-
-		
+	
 		switch (status) {
 		case OPEN:
 			System.out.println("Wait for someone else to join game");

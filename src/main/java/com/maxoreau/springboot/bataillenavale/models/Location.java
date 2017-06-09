@@ -2,12 +2,14 @@ package com.maxoreau.springboot.bataillenavale.models;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -35,6 +37,9 @@ public class Location implements Serializable {
 	
 	@OneToOne
 	private Boat boat;
+	
+	@ManyToOne
+	private Grid grid;
 
 	public Location() {
 		status = LocationStatus.UNDISCOVERED;
@@ -88,10 +93,18 @@ public class Location implements Serializable {
 		this.boat = boat;
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+	}
+
 	@Override
 	public String toString() {
 		return "Location [id=" + id + ", col=" + col + ", row=" + row + ", status=" + status + ", nature=" + nature
-				+ ", boat=" + boat + "]";
+				+ ", boat=" + boat + ", grid=" + grid + "]";
 	}
 	
 

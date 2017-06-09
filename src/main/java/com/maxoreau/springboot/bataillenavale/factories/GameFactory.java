@@ -1,6 +1,5 @@
 package com.maxoreau.springboot.bataillenavale.factories;
 
-import com.maxoreau.springboot.bataillenavale.models.Boat;
 import com.maxoreau.springboot.bataillenavale.models.Game;
 import com.maxoreau.springboot.bataillenavale.models.GameManager;
 import com.maxoreau.springboot.bataillenavale.models.Player;
@@ -32,10 +31,8 @@ public class GameFactory {
 		
 		// on attribue des nouvelles grilles aux joueurs. Utilisation d'une factory
 		game.setGridPlayer1(GridFactory.getGridFactory().createGrid());
-		game.getGridPlayer1().setGame(game);
 
 		game.setGridPlayer2(GridFactory.getGridFactory().createGrid());
-		game.getGridPlayer2().setGame(game);
 
 		// le joueur qui crée la partie commencera à jouer.
 		game.setCurrentPlayer(p); 

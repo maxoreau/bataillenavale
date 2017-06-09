@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Battleship create player</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" media="all" href="./style.css" />
+</head>
+
+<body>
+	<div class="page">
+
+		<div id="head" class="header">
+			<h2>Player Creation</h2>
+		</div>
+
+		<div id="wrap" class="wraper">
+
+			<div id="login">
+				<fieldset>
+					<legend>Enter player information</legend>
+					<table>
+						<tr>
+							<td><label class="formItem" for="inputName">name</label></td>
+							<td><input type="text" class="formItem" id="inputName" /></td>
+						</tr>
+					</table>
+					<button type="button" id="btnEnterPlayerName">Create</button>
+					<button type="button" id="btnClearPlayerName">Clear</button>
+
+				</fieldset>
+
+            <button type="button" id="showPlayersBtn">click me</button>
+			</div>
+			<div id="showPlayers"></div>
+
+		</div>
+
+
+		<div id="foot" class="footer"></div>
+
+		<script src="/script/jquery-3.2.1.js"></script>
+		<script scr="/script/appjquerybattleship.js"></script>
+	</div>
+</body>
+
+</html>

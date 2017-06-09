@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -29,6 +31,9 @@ public class Boat implements Serializable {
 	//coordinates of the top/left Location
 	private int col;
 	private int row;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Grid grid = new Grid();
 	
 	@Transient
 	private List<Location> positions = new ArrayList<>();
@@ -90,11 +95,18 @@ public class Boat implements Serializable {
 		this.positions = positions;
 	}
 
+	public Grid getGrid() {
+		return grid;
+	}
+
+	public void setGrid(Grid grid) {
+		this.grid = grid;
+	}
+
 	@Override
 	public String toString() {
 		return "Boat [id=" + id + ", size=" + size + ", orientation=" + orientation + ", col=" + col + ", row=" + row
-				+ ", positions=" + positions + "]";
+				+ ", grid=" + grid + ", positions=" + positions + "]";
 	}
-	
 
 }

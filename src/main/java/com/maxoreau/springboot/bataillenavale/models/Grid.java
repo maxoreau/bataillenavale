@@ -28,14 +28,12 @@ public class Grid implements Serializable {
 	private Long id;
 	private int size;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="grid", cascade = CascadeType.ALL)
 	private List<Location> locations;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="grid", cascade = CascadeType.ALL)
 	private List<Boat> boats;
 
-	@OneToOne
-	private Game game;
 	
 	private int life;
 
@@ -77,14 +75,6 @@ public class Grid implements Serializable {
 		this.boats = boats;
 	}
 
-	public Game getGame() {
-		return game;
-	}
-
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
 	public int getLife() {
 		return life;
 	}
@@ -95,8 +85,8 @@ public class Grid implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Grid [id=" + id + ", size=" + size + ", locations=" + locations + ", boats=" + boats + ", game=" + game
-				+ ", life=" + life + "]";
+		return "Grid [id=" + id + ", size=" + size + ", locations=" + locations + ", boats=" + boats + ", life=" + life
+				+ "]";
 	}
 
 	public void fireManager(Fire fire) {

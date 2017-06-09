@@ -53,6 +53,7 @@ public class GridFactory {
 		}
 		for (Boat boat : grid.getBoats()) {
 			grid.setLife((grid.getLife() + boat.getSize()));
+			boat.setGrid(grid);
 		}
 
 		return grid;
@@ -68,6 +69,7 @@ public class GridFactory {
 				location.setRow(row);
 				location.setNature(LocationNature.WATER);
 				location.setStatus(LocationStatus.UNDISCOVERED);
+				location.setGrid(grid);
 				grid.getLocations().add(location);
 			}
 		}
