@@ -167,11 +167,15 @@ public class Game implements Serializable {
 				if ((gridPlayer1.getLife() - gridPlayer2.getLife()) > 0) {
 					// PLAYER 1 GAGNE
 					System.out.println(player1.getName() + " WINS : remaining life : " + gridPlayer1.getLife() + " / " + gridPlayer2.getLife());
-					winner = player1;					
+					winner = player1;
+					int nbWins = player1.getNbWins() + 1;
+					player1.setNbWins(nbWins);
 				} else if ((gridPlayer1.getLife() - gridPlayer2.getLife()) < 0) {
 					// PLAYER 2 GAGNE
 					System.out.println(player2.getName() + " WINS : remaining life : " + gridPlayer2.getLife() + " / " + gridPlayer1.getLife());
 					winner = player2;
+					int nbWins = player2.getNbWins() + 1;
+					player2.setNbWins(nbWins);
 				} else {
 					// MATCH NUL
 					System.out.println("DRAW : remaining life = " + gridPlayer1.getLife());					

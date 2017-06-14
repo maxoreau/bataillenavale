@@ -30,7 +30,7 @@ public class Player implements Serializable {
 	private Long id;
 	private String name;
 	
-	@OneToMany
+	@Transient
 	private List<Game> games = new ArrayList<>();
 	
 	@OneToOne
