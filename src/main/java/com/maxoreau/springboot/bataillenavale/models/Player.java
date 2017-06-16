@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.maxoreau.springboot.bataillenavale.factories.GameFactory;
 import com.maxoreau.springboot.bataillenavale.models.Game.GameStatus;
 
@@ -17,6 +20,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "id")
 public class Player implements Serializable {
 
 	/**
@@ -28,13 +34,15 @@ public class Player implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private String name;
 	
-	@Transient
+	@OneToMany
 	private List<Game> games = new ArrayList<>();
 	
 	@OneToOne
 	private Game onGoingGame;
+	
 	private int nbWins;
 
 	public Player() {

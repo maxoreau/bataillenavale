@@ -13,7 +13,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "id")
 public class Location implements Serializable {
 	/**
 	 * 
@@ -38,7 +44,7 @@ public class Location implements Serializable {
 	@OneToOne
 	private Boat boat;
 	
-	@ManyToOne
+	@Transient
 	private Grid grid;
 
 	public Location() {

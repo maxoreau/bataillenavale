@@ -12,8 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "id")
 public class Game implements Serializable {
 
 	/**
@@ -29,20 +35,25 @@ public class Game implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	@Enumerated(EnumType.STRING)
 	private GameStatus status = GameStatus.OPEN; // OPEN (attente d'un deuxieme joueur), ONGOING, FINISHED
 	
 	@OneToOne
 	private Player currentPlayer;
+	
 	@OneToOne
 	private Player player1;
+	
 	@OneToOne
 	private Player player2;
+	
 	@OneToOne
 	private Player winner;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Grid gridPlayer1;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Grid gridPlayer2;
 	

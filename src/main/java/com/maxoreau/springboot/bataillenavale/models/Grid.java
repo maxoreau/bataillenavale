@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.maxoreau.springboot.bataillenavale.models.Location.LocationStatus;
 
 import javax.persistence.CascadeType;
@@ -16,6 +18,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 @Entity
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class,
+		  property = "id")
 public class Grid implements Serializable {
 
 	/**
@@ -23,17 +28,18 @@ public class Grid implements Serializable {
 	 */
 	@Transient
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
 	private int size;
 
-	@OneToMany(mappedBy="grid", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Location> locations;
 
-	@OneToMany(mappedBy="grid", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Boat> boats;
-
 	
 	private int life;
 

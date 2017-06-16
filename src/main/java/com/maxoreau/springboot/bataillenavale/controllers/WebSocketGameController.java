@@ -26,6 +26,8 @@ public class WebSocketGameController {
 	@Autowired
 	private PlayerRepository playerRepo;
 	
+	
+	
 
 	@MessageMapping("/openGames")
     @SendTo("/topic/")
