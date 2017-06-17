@@ -10,6 +10,8 @@ import com.maxoreau.springboot.bataillenavale.models.Player;
 
 public interface GameRepository extends CrudRepository<Game, Long> {
 	
+	List<Game> findByPlayer1(Player p);
+	List<Game> findByPlayer2(Player p);
 	List<Game> findByStatus(GameStatus status);
 	List<Game> findByWinner(Player player);
 

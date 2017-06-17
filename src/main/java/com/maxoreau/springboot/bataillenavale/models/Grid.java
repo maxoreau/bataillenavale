@@ -35,10 +35,10 @@ public class Grid implements Serializable {
 	
 	private int size;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="grid", cascade = CascadeType.ALL)
 	private List<Location> locations;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="grid", cascade = CascadeType.ALL)
 	private List<Boat> boats;
 	
 	private int life;

@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -37,10 +39,10 @@ public class Player implements Serializable {
 	
 	private String name;
 	
-	@OneToMany
+	@Transient
 	private List<Game> games = new ArrayList<>();
 	
-	@OneToOne
+	@ManyToOne
 	private Game onGoingGame;
 	
 	private int nbWins;
@@ -104,12 +106,12 @@ public class Player implements Serializable {
 	}
 
 	public Game createGame() {
-		System.out.println("player " + this.name + " createGame");
+		System.out.println("player " + this.name + " creates game");
 		return GameFactory.getGameFactory().createGame(this);
 	}
 
 	public void enterGame(Game game) {
-		System.out.println("player " + this.name + " enterGame");
+		System.out.println("player " + this.name + " enters game");
 		
 		// La partie est en attente d'un deuxieme joueur et on peut y accéder
 		if (game.getStatus().equals(GameStatus.OPEN)) { 
@@ -126,6 +128,7 @@ public class Player implements Serializable {
 			// cette partie devient la partie en cours et est ajoutée à la liste des parties
 			onGoingGame = game;
 			games.add(onGoingGame);
+			GameManager.getGameManager().updateGame(game);
 						
 			
 		// La partie est déjà en cours et le joueur appartient à la partie, il peut alors la rejoindre

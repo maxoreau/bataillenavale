@@ -46,20 +46,3 @@ table {
     justify-content: center;
     padding-bottom: 2px;
 }
-
-.wraper .fonctions {
-    margin-right: 1px;
-    flex: 4;
-    background-color: #808080;
-}
-
-.wraper .fonctions .listeContacts {
-    width: 150px;
-}
-
-.wraper .affichage {
-    margin-left: 1px;
-    padding: 0;
-    flex: 3;
-    background-color: #808080;
-}

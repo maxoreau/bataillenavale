@@ -2,30 +2,29 @@
  * 
  */
 var stompClient = null;
-var playerName
-
-function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#disconnect").prop("disabled", !connected);
-    if (connected) {
-        $("#conversation").show();
-    }
-    else {
-        $("#conversation").hide();
-    }
-    $("#greetings").html("");
-}
+var playerName;
 
 function connect() {
-    var socket = new SockJS('/battleship-websocket');
+    var socket = new SockJS('/login');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({}, function(frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/topic/players', function(greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
+}
+
+function setConnected(connected) {
+    if (connected) {
+        $("#disconnect").show();
+        $("#login").hide();
+    } else {
+        $("#login").show();
+        $("#disconnect").hide();
+        setInGame(false);
+    }
 }
 
 function setInGame(inGame) {
@@ -35,6 +34,7 @@ function setInGame(inGame) {
         $("#playGround").hide();
     }
 }
+
 
 function disconnect() {
     if (stompClient != null) {
@@ -52,13 +52,13 @@ function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
 
-$(function () {
-    $("form").on('submit', function (e) {
+$(function() {
+    $("form").on('submit', function(e) {
         e.preventDefault();
     });
-    $("#connect").click(function () { connect(); });
-    $("#disconnect").click(function () { disconnect(); });
-    $("#send").click(function () { sendName(); });
+    $("#connect").click(function() { connect(); });
+    $("#disconnect").click(function() { disconnect(); });
+    $("#send").click(function() { sendName(); });
 });
 
 
@@ -73,14 +73,14 @@ function Player(id, name, nbWins) {
     this.nbWins = nbwins;
 }
 
-$('#showPlayersBtn').click(function () {
+$('#showPlayersBtn').click(function() {
     console.log("click");
     fetchAllPlayers();
 })
 
 function fetchAllPlayers() {
     var url = ('http://localhost:8080/battleship/players');
-    $.getJSON(url, function (players) {
+    $.getJSON(url, function(players) {
         console.log(players);
         fillDivShowPlayers(players)
     });
@@ -95,7 +95,7 @@ function fillDivShowPlayers(contacts) { // affichage des contacts dans une liste
     if (players.length == 0) {
         $('#showPlayers').hide();
     } else {
-        players.forEach(function (player) { // itérer sur la collection pour remplir compléter le html
+        players.forEach(function(player) { // itérer sur la collection pour remplir compléter le html
             //  générant la liste à puces
             var line = '<tr>';
             line += ('<td><input type="checkbox" value="' + player.id + '"/></td>');
@@ -108,9 +108,3 @@ function fillDivShowPlayers(contacts) { // affichage des contacts dans une liste
 }
 
 var div = "showPlayers";
-
-
-
-
-
-

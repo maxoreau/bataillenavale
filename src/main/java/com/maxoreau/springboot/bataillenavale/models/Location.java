@@ -44,7 +44,7 @@ public class Location implements Serializable {
 	@OneToOne
 	private Boat boat;
 	
-	@Transient
+	@ManyToOne
 	private Grid grid;
 
 	public Location() {

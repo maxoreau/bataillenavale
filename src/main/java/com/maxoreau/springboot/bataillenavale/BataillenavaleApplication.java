@@ -20,74 +20,61 @@ public class BataillenavaleApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BataillenavaleApplication.class, args);
-//
-//		Player p1 = new Player();
-//		p1.setName("p1");
-//
-//		Player p2 = new Player();
-//		p2.setName("p2");
-//
-//		int p1Wins = 0;
-//		int p2Wins = 0;
-//		int draws = 0;
-//
-//		for (int i = 0; i < 10000; i++) {
-//
-//			Long debut = System.currentTimeMillis();
-//			Game g1 = p1.createGame();
-//			Long fin = System.currentTimeMillis();
-//			System.out.println("jeu généré en " + (fin - debut) + " millisecondes");
-//			p2.enterGame(g1);
-//
-//			do {
-//				int colA = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
-//				int rowA = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
-//				p1.fire(colA, rowA);
-//				System.out.println("player2's grid");
-//				g1.getGridPlayer2().displayOwnGrid();
-//
-//				int colB = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
-//				int rowB = ThreadLocalRandom.current().nextInt(0, (Parameters.getGridSize()));
-//				p2.fire(colB, rowB);
-//				System.out.println("player1's grid");
-//				g1.getGridPlayer1().displayOwnGrid();
-//
-//			} while (g1.getStatus().compareTo(GameStatus.ONGOING) == 0);
-//			
-//			if (g1.getWinner().equals(p1)) {
-//				p1Wins++;
-//			} else if (g1.getWinner().equals(p2)) {
-//				p2Wins++;
-//			} else {
-//				draws++;
-//			}
-//		}
-//		
-//		System.out.println("p1 wins : " + p1Wins);
-//		System.out.println("p2 wins : " + p2Wins);
-//		System.out.println("draws : " + draws);
 
 	}
 
 	// args correspond à command linerunner
-	
-//	@Bean
-//	public CommandLineRunner demo(PlayerRepository playerRepo, GameRepository gameRepo) {
-//		return (args) -> {
-//
-//			
-//			
+
+	@Bean
+	public CommandLineRunner demo(PlayerRepository playerRepo, GameRepository gameRepo) {
+		return (args) -> {
+
+			Game g = playerRepo.findByName("bob").get(0).createGame();
+			
+			playerRepo.save(playerRepo.findByName("bob").get(0));
+			
+			playerRepo.findByName("ruth").get(0).enterGame(g);
+			
+			playerRepo.save(playerRepo.findByName("ruth").get(0));
+			
+			gameRepo.save(g);
+			
+			
+			
+			for (int i = 0; i < 15; i++) {				
+					 int colA = ThreadLocalRandom.current().nextInt(0,
+					 (Parameters.getGridSize()));
+					 int rowA = ThreadLocalRandom.current().nextInt(0,
+					 (Parameters.getGridSize()));
+					 playerRepo.findByName("bob").get(0).fire(colA, rowA);
+					 System.out.println("player2's grid");
+					 g.getGridPlayer2().displayOwnGrid();
+					
+					 int colB = ThreadLocalRandom.current().nextInt(0,
+					 (Parameters.getGridSize()));
+					 int rowB = ThreadLocalRandom.current().nextInt(0,
+					 (Parameters.getGridSize()));
+					 playerRepo.findByName("ruth").get(0).fire(colB, rowB);
+					 System.out.println("player1's grid");
+					 g.getGridPlayer1().displayOwnGrid();
+									
+			}
+		};
+	}
+}
+			
+			
 //			 Player p1 = new Player();
-//			 p1.setName("Bob");
+//			 p1.setName("bob");
 //			
 //			 Player p2 = new Player();
-//			 p2.setName("Chuck");
+//			 p2.setName("chuck");
 //			 
 //			 Player p3 = new Player();
-//			 p3.setName("Nagara");
+//			 p3.setName("ruth");
 //			
 //			 Player p4 = new Player();
-//			 p4.setName("God");
+//			 p4.setName("koost");
 //
 //			 playerRepo.save(p1);
 //			 playerRepo.save(p2);
@@ -97,8 +84,10 @@ public class BataillenavaleApplication {
 //			 Long debut = System.currentTimeMillis();
 //			 Game g1 = p1.createGame();
 //			 Long fin = System.currentTimeMillis();
+//			 gameRepo.save(g1);
 //			 System.out.println("jeu généré en " + (fin - debut) + " millisecondes");
-//			 p2.enterGame(g1);	
+//			 p2.enterGame(g1);
+//			 gameRepo.save(g1);	
 //
 //			
 //			 do {
@@ -120,18 +109,23 @@ public class BataillenavaleApplication {
 //
 //			 } while (g1.getStatus().compareTo(GameStatus.ONGOING) == 0);
 //			 
+//			 System.out.println("a");
+//			 gameRepo.save(g1);
+//			 System.out.println("b");
+//			 
+//			 playerRepo.save(p1);
+//			 System.out.println("c");
+//			 playerRepo.save(p2);
+//			 System.out.println("d");
+//			 
 //			 Game g2 = p1.createGame();
 //			 
-//			 gameRepo.save(g1);
 //			 gameRepo.save(g2);
 //			 
 //			 playerRepo.save(p1);
-//			 playerRepo.save(p2);
-//			 playerRepo.save(p3);
-//			 playerRepo.save(p4);
 //			 
 //			
 //
 //		};
 //	}
-}
+//}

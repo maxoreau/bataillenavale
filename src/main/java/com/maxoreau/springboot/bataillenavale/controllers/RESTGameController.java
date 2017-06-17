@@ -1,15 +1,19 @@
 package com.maxoreau.springboot.bataillenavale.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maxoreau.springboot.bataillenavale.factories.PlayerFactory;
 import com.maxoreau.springboot.bataillenavale.models.Game;
+import com.maxoreau.springboot.bataillenavale.models.GameManager;
 import com.maxoreau.springboot.bataillenavale.models.Player;
 import com.maxoreau.springboot.bataillenavale.repositories.GameRepository;
 import com.maxoreau.springboot.bataillenavale.repositories.PlayerRepository;
@@ -28,13 +32,13 @@ public class RESTGameController {
     
 	
     @PostMapping // Map ONLY POST Requests
-	public void createPlayer (@RequestBody Player player) {
+	public boolean createPlayer (@RequestBody Player player) {
     	System.out.println("Rest createPlayer() entered");
     	System.out.println(player);
-    	playerRepo.save(player);
+    	return GameManager.getGameManager().addPlayer(player);
 	}
-
-	@GetMapping("/players")
+    
+    @GetMapping("/players")
 	public List<Player> getAllPlayers() {
 		// This returns a JSON or XML with the users
     	System.out.println("Rest getAllPlayers() entered");
@@ -46,6 +50,16 @@ public class RESTGameController {
 		// This returns a JSON or XML with the users
     	System.out.println("Rest getAllGames() entered");
 		return (List<Game>) gameRepo.findAll();
+	}
+	
+	@GetMapping("/{name}/mygames")
+	public List<Game> getMyGames(@PathVariable("name") String name) {
+		// This returns a JSON
+    	System.out.println("Rest getMyGames() entered");
+    	List<Game> myGames = new ArrayList<>();
+    	myGames.addAll(gameRepo.findByPlayer1(playerRepo.findByName(name).get(0)));
+    	myGames.addAll(gameRepo.findByPlayer2(playerRepo.findByName(name).get(0)));
+		return myGames;
 	}
 
 }

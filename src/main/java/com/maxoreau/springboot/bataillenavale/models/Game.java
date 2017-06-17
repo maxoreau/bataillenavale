@@ -9,6 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -42,13 +45,13 @@ public class Game implements Serializable {
 	@OneToOne
 	private Player currentPlayer;
 	
-	@OneToOne
+	@ManyToOne
 	private Player player1;
 	
-	@OneToOne
+	@ManyToOne
 	private Player player2;
 	
-	@OneToOne
+	@ManyToOne
 	private Player winner;
 	
 	@OneToOne(cascade = CascadeType.ALL)

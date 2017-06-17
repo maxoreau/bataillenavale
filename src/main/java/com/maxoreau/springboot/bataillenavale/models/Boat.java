@@ -41,7 +41,7 @@ public class Boat implements Serializable {
 	private int col;
 	private int row;
 	
-	@Transient
+	@ManyToOne
 	private Grid grid;
 	
 	@Transient

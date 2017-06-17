@@ -8,7 +8,7 @@ public class GameFactory {
 
 	private static GameFactory gameFactory;
 	
-	public GameFactory() {
+	private GameFactory() {
 		super();
 	}
 
@@ -43,7 +43,8 @@ public class GameFactory {
 		p.getGames().add(game); 
 		
 		// enregistre dans la liste totale des parties
-		GameManager.getGames().add(game); 
+		GameManager.getGameManager().addGame(game);
+		GameManager.getGameManager().updatePlayer(p);
 		return game;
 	}
 	
