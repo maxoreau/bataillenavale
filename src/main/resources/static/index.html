@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Battleship Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="./bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="./style.css" />
+</head>
+
+<body>
+    <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+    <div id="main-content" class="container">
+
+        <div id="head" class="row">
+            <div class="col-md-12">
+                <h2>Battleship</h2>
+            </div>
+        </div>
+
+        <div id="loginDiv" class="row">
+            <div class="col-md-4">
+                <form class="form-inline">
+                    <div id="loginForm" class="form-group">
+                        <label for="name">What is your name?</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your name here..." />
+                    </div>
+                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                    <button id="disconnect" class="btn btn-default" type="submit">Disconnect</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="description" class="row">
+            <div class="col-md-4">
+                <table id="openGames" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Open Games</th>
+                        </tr>
+                    </thead>
+                    <tbody id="games">
+                    </tbody>
+                </table>
+            </div>
+            <button id="showOpenGames" class="btn btn-default" type="submit">show game</button>
+            <button id="joinGame" class="btn btn-default" type="submit">join game</button>
+            <div class="col-md-4">
+                <table id="connectedPlayers" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Online players</th>
+                        </tr>
+                    </thead>
+                    <tbody id="players">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div id="playGround" class="row">
+            <p>playground</p>
+            <div id="myGrid" class="col-md-5">
+                <p>ma grille</p>
+            </div>
+            <div id="enemyGrid" class="col-md-5">
+                <p>grille ennemie</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="foot" class="footer"></div>
+
+    <script src="script/jquery-3.2.1.js"></script>
+    <script src="script/sockjs.min.js"></script>
+    <script src="script/stomp.min.js"></script>
+    <script src="script/appjquerybattleship.js"></script>
+
+</body>
+
+</html>

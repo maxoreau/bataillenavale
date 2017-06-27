@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Battleship Game</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="./style.css" />
+</head>
+
+<body>
+    <div class="page">
+
+        <div id="head" class="header">
+            <h2>Battleship</h2>
+        </div>
+
+        <div id="wrap" class="wraper">
+            <div id="">
+                <div id="login">
+                    <fieldset>
+                        <legend>Enter your nickname</legend>
+                        <table>
+                            <tr>
+                                <td><label class="formItem" for="name">nickname</label></td>
+                                <td><input type="text" class="formItem" id="name" /></td>
+                            </tr>
+                        </table>
+                        <button type="button" id="btnEnterPlayerName">Enter</button>
+
+                    </fieldset>
+                </div>
+                <button type="button" id="disconnect">disconnect</button>
+            </div>
+            <div id="myGames"></div>
+
+
+
+        </div>
+
+
+        <div id="foot" class="footer"></div>
+
+        <script src="script/jquery-3.2.1.js"></script>
+        <script src="script/sockjs.min.js"></script>
+        <script src="script/stomp.min.js"></script>
+        <script src="script/appjquerybattleship.js"></script>
+    </div>
+</body>
+
+</html>
