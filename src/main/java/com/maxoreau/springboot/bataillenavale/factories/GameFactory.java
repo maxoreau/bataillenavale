@@ -1,5 +1,7 @@
 package com.maxoreau.springboot.bataillenavale.factories;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class GameFactory {
 	
 	public GameFactory() {
 		super();
+	}
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("initialisation du GameFactory");		
 	}
 
 	// Creation d'une partie par un joueur

@@ -2,6 +2,8 @@ package com.maxoreau.springboot.bataillenavale.factories;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Service;
 
 import com.maxoreau.springboot.bataillenavale.models.Boat;
@@ -17,6 +19,11 @@ public class BoatFactory {
 
 	public BoatFactory() {
 		super();
+	}
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("initialisation du BoatFactory");		
 	}
 
 	public Boat createBoat(Grid grid, Integer size) {

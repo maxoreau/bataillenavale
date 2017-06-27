@@ -1,5 +1,7 @@
 package com.maxoreau.springboot.bataillenavale.factories;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,11 @@ public class GridFactory {
 
 	public GridFactory() {
 		super();
+	}
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("initialisation du GridFactory");		
 	}
 
 	public Grid createGrid() {
